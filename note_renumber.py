@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-routine which tries to create a valid table of contents file for SE projects
+routine which renumbers all endnotes in content order
 """
 import argparse
 import os
@@ -63,15 +63,17 @@ def extract_anchor(href: str) -> str:
 		return ""
 
 
-def process_file(file_path: str, endnotes: list, current_note_number: int) -> int:
+def process_file(text_path:str, file_name: str, endnotes: list, current_note_number: int) -> int:
 	"""
 	Reads a content file, locates and processes the endnotes,
 	accumulating info on them in a global list, and returns the next note number
-	:param file_path: path to the content file
+	:param text_path: path to the text files in the project
+	:param file_name: the name of the file being processed eg chapter-1.xhtml
 	:param endnotes: list of notes we are building
 	:param current_note_number: the current note number we are allocating
 	:return: the next note number to use
 	"""
+	file_path = os.path.join(text_path,file_name)
 	xhtml = gethtml(file_path)
 	soup = BeautifulSoup(xhtml, "lxml")
 	links = soup.find_all("a")
@@ -85,11 +87,14 @@ def process_file(file_path: str, endnotes: list, current_note_number: int) -> in
 				old_anchor = extract_anchor(href)
 			new_anchor = "note-{:d}".format(current_note_number)
 			# now update the link
-			link["href"] = '../text/endnotes.xhtml#' + new_anchor
+			link["href"] = 'endnotes.xhtml#' + new_anchor
 			link["id"] = 'noteref-{:d}'.format(current_note_number)
 			link.string = str(current_note_number)
 			if new_anchor != old_anchor:
 				print("Changed " + old_anchor + " to " + new_anchor + " in " + file_path)
+				needs_rewrite = True
+			else:
+				needs_rewrite = False
 			# now try to find this in endnotes
 			matches = list(filter(lambda x: x.anchor == old_anchor, endnotes))
 			if len(matches) == 0:
@@ -97,12 +102,11 @@ def process_file(file_path: str, endnotes: list, current_note_number: int) -> in
 			elif len(matches) > 1:
 				print("Duplicate anchors in endnotes file for anchor " + old_anchor)
 			else:  # found a single match, which is what we want
-				needs_rewrite = True
 				listnote = matches[0]
 				listnote.number = current_note_number
 				listnote.matched = True
 				# we don't change the anchor or the back ref just yet
-				listnote.source_file = file_path
+				listnote.source_file = file_name
 			current_note_number += 1
 
 	# if we need to write back the body text file
@@ -165,7 +169,7 @@ def recreate(textpath: str, notes_soup: BeautifulSoup, endnotes: list):
 						if epub_type == "se:referrer":
 							href = link.get("href") or ""
 							if href:
-								link["href"] = "../text/" + endnote.source_file + "#noteref-" + str(endnote.number)
+								link["href"] = endnote.source_file + "#noteref-" + str(endnote.number)
 				li.append(content)
 			ol.append(li)
 	new_file = open(os.path.join(textpath, "endnotes.xhtml"), "w")
@@ -208,8 +212,10 @@ def main():
 	for file_name in file_list:
 		if file_name in exclude_list:
 			continue
+		print("Processing " + file_name)
 		processed += 1
-		current_num = process_file(os.path.join(textpath, file_name), endnotes, current_num)
+		current_num = process_file(textpath, file_name, endnotes, current_num)
+		print("Endnotes processed so far: " + str(current_num))
 	if processed == 0:
 		print("No files processed. Did you update manifest and order the spine?")
 	else:
