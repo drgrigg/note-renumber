@@ -30,7 +30,6 @@ def get_content_files(opf: BeautifulSoup) -> list:
 	ret_list = []
 	for itemref in itemrefs:
 		ret_list.append(itemref["idref"])
-
 	return ret_list
 
 
@@ -63,7 +62,10 @@ def extract_anchor(href: str) -> str:
 		return ""
 
 
-def process_file(text_path:str, file_name: str, endnotes: list, current_note_number: int) -> int:
+# global variable, unfortunately
+notes_changed = 0
+
+def process_file(text_path: str, file_name: str, endnotes: list, current_note_number: int) -> int:
 	"""
 	Reads a content file, locates and processes the endnotes,
 	accumulating info on them in a global list, and returns the next note number
@@ -73,7 +75,8 @@ def process_file(text_path:str, file_name: str, endnotes: list, current_note_num
 	:param current_note_number: the current note number we are allocating
 	:return: the next note number to use
 	"""
-	file_path = os.path.join(text_path,file_name)
+	global notes_changed
+	file_path = os.path.join(text_path, file_name)
 	xhtml = gethtml(file_path)
 	soup = BeautifulSoup(xhtml, "lxml")
 	links = soup.find_all("a")
@@ -86,15 +89,14 @@ def process_file(text_path:str, file_name: str, endnotes: list, current_note_num
 			if href:
 				old_anchor = extract_anchor(href)
 			new_anchor = "note-{:d}".format(current_note_number)
-			# now update the link
-			link["href"] = 'endnotes.xhtml#' + new_anchor
-			link["id"] = 'noteref-{:d}'.format(current_note_number)
-			link.string = str(current_note_number)
 			if new_anchor != old_anchor:
 				print("Changed " + old_anchor + " to " + new_anchor + " in " + file_path)
+				notes_changed += 1
+				# update the link in the soup object
+				link["href"] = 'endnotes.xhtml#' + new_anchor
+				link["id"] = 'noteref-{:d}'.format(current_note_number)
+				link.string = str(current_note_number)
 				needs_rewrite = True
-			else:
-				needs_rewrite = False
 			# now try to find this in endnotes
 			matches = list(filter(lambda x: x.anchor == old_anchor, endnotes))
 			if len(matches) == 0:
@@ -178,7 +180,7 @@ def recreate(textpath: str, notes_soup: BeautifulSoup, endnotes: list):
 
 
 # don't process these files
-exclude_list = ["titlepage.xhtml", "colophon.xhtml", "uncopyright.xhtml", "imprint.xhtml", "halftitle.xhtml"]
+exclude_list = ["titlepage.xhtml", "colophon.xhtml", "uncopyright.xhtml", "imprint.xhtml", "halftitle.xhtml", "endnotes.xhtml"]
 
 
 def main():
@@ -215,13 +217,17 @@ def main():
 		print("Processing " + file_name)
 		processed += 1
 		current_num = process_file(textpath, file_name, endnotes, current_num)
-		print("Endnotes processed so far: " + str(current_num))
+		print("Endnotes processed so far: " + str(current_num - 1))  # we subtract 1 because process_file increments it after each note found
 	if processed == 0:
 		print("No files processed. Did you update manifest and order the spine?")
 	else:
-		print("Found {:d} endnotes.".format(current_num - 1))  # we subtract 1 because process_file increments it after each note found
-		# now recreate the endnotes file
-		recreate(textpath, notes_soup, endnotes)
+		print("Found {:d} endnotes.".format(current_num - 1))
+		if notes_changed > 0:
+			print("Changed {:d} endnotes")
+			# so we need to recreate the endnotes file
+			recreate(textpath, notes_soup, endnotes)
+		else:
+			print("No changes made")
 
 
 if __name__ == "__main__":
