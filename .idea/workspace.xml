@@ -15,8 +15,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/note_renumber.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="269">
-              <caret line="223" column="44" selection-start-line="223" selection-start-column="44" selection-end-line="223" selection-end-column="44" />
+            <state relative-caret-position="413">
+              <caret line="231" column="34" lean-forward="true" selection-start-line="231" selection-start-column="34" selection-end-line="231" selection-end-column="34" />
               <folding>
                 <element signature="e#85#100#0" expanded="true" />
               </folding>
@@ -27,7 +27,7 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$USER_HOME$/tools/se/formatting.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="12280">
+            <state relative-caret-position="12000">
               <caret line="614" column="4" selection-start-line="614" selection-start-column="4" selection-end-line="614" selection-end-column="4" />
             </state>
           </provider>
@@ -62,32 +62,16 @@
     </option>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="127" />
-    <option name="y" value="79" />
-    <option name="width" value="1440" />
-    <option name="height" value="899" />
+    <option name="x" value="434" />
+    <option name="y" value="38" />
+    <option name="width" value="1486" />
+    <option name="height" value="1162" />
   </component>
   <component name="ProjectView">
     <navigator currentView="Scope" currentSubView="Scope 'Project Files'; set:Project Files; class com.intellij.psi.search.scope.ProjectFilesScope" proportions="" version="1">
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scope">
-        <subPane subId="Scope 'Project Files'; set:Project Files; class com.intellij.psi.search.scope.ProjectFilesScope">
-          <expand>
-            <path>
-              <item name="note-renumber" type="3d21c010:ScopeViewTreeModel$ProjectNode" />
-              <item name="~/Dropbox/PycharmProjects/note-renumber" type="442cc68d:ScopeViewTreeModel$RootNode" />
-            </path>
-            <path>
-              <item name="note-renumber" type="3d21c010:ScopeViewTreeModel$ProjectNode" />
-              <item name="~/Dropbox/PycharmProjects/note-renumber" type="442cc68d:ScopeViewTreeModel$RootNode" />
-              <item name=".idea" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-            </path>
-          </expand>
-          <select />
-        </subPane>
-      </pane>
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -108,10 +92,27 @@
           <select />
         </subPane>
       </pane>
+      <pane id="Scope">
+        <subPane subId="Scope 'Project Files'; set:Project Files; class com.intellij.psi.search.scope.ProjectFilesScope">
+          <expand>
+            <path>
+              <item name="note-renumber" type="3d21c010:ScopeViewTreeModel$ProjectNode" />
+              <item name="~/Dropbox/PycharmProjects/note-renumber" type="442cc68d:ScopeViewTreeModel$RootNode" />
+            </path>
+            <path>
+              <item name="note-renumber" type="3d21c010:ScopeViewTreeModel$ProjectNode" />
+              <item name="~/Dropbox/PycharmProjects/note-renumber" type="442cc68d:ScopeViewTreeModel$RootNode" />
+              <item name=".idea" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+            </path>
+          </expand>
+          <select />
+        </subPane>
+      </pane>
     </panes>
   </component>
   <component name="PropertiesComponent">
     <property name="ASKED_SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
+    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
   </component>
@@ -141,7 +142,7 @@
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <option name="SCRIPT_NAME" value="$PROJECT_DIR$/note_renumber.py" />
-      <option name="PARAMETERS" value="&quot;$PROJECT_DIR$/../../SE Projects/lytton-strachey_queen-victoria&quot;" />
+      <option name="PARAMETERS" value="&quot;$USER_HOME$/OneDrive/Standard Ebooks/Clarissa/samuel-richardson_clarissa-harlowe&quot;" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
       <option name="MODULE_MODE" value="false" />
@@ -186,16 +187,16 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="127" y="79" width="1440" height="899" extended-state="0" />
+    <frame x="434" y="38" width="1486" height="1162" extended-state="0" />
     <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.15221988" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.14744027" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
-      <window_info anchor="bottom" id="Find" order="1" weight="0.32908162" />
+      <window_info anchor="bottom" id="Find" order="1" weight="0.32832834" />
       <window_info anchor="bottom" id="Run" order="2" />
-      <window_info anchor="bottom" id="Debug" order="3" weight="0.39923468" />
+      <window_info anchor="bottom" id="Debug" order="3" visible="true" weight="0.38013372" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" />
@@ -214,22 +215,6 @@
     <MESSAGE value="Several improvements in efficiency made." />
     <option name="LAST_COMMIT_MESSAGE" value="Several improvements in efficiency made." />
   </component>
-  <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/note_renumber.py</url>
-          <line>294</line>
-          <option name="timeStamp" value="3" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/note_renumber.py</url>
-          <line>223</line>
-          <option name="timeStamp" value="4" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
-  </component>
   <component name="editorHistoryManager">
     <entry file="file:///Library/Frameworks/Python.framework/Versions/3.7/lib/python3.7/tokenize.py">
       <provider selected="true" editor-type-id="text-editor">
@@ -240,8 +225,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/note_renumber.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="269">
-          <caret line="223" column="44" selection-start-line="223" selection-start-column="44" selection-end-line="223" selection-end-column="44" />
+        <state relative-caret-position="413">
+          <caret line="231" column="34" lean-forward="true" selection-start-line="231" selection-start-column="34" selection-end-line="231" selection-end-column="34" />
           <folding>
             <element signature="e#85#100#0" expanded="true" />
           </folding>
@@ -250,7 +235,7 @@
     </entry>
     <entry file="file://$USER_HOME$/tools/se/formatting.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="12280">
+        <state relative-caret-position="12000">
           <caret line="614" column="4" selection-start-line="614" selection-start-column="4" selection-end-line="614" selection-end-column="4" />
         </state>
       </provider>

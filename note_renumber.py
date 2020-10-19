@@ -231,9 +231,8 @@ def recreate(textpath: str, notes_soup: BeautifulSoup, endnotes: list):
 								link["href"] = endnote.source_file + "#noteref-" + str(endnote.number)
 				li.append(content)
 			ol.append(li)
-	new_file = open(os.path.join(textpath, "new_endnotes.xhtml"), "w")
+	new_file = open(os.path.join(textpath, "endnotes.xhtml"), "w")
 	new_file.write(format_xhtml(str(notes_soup)))
-	# new_file.write(str(notes_soup))
 	new_file.close()
 
 
@@ -242,6 +241,7 @@ exclude_list = ["titlepage.xhtml", "colophon.xhtml", "uncopyright.xhtml", "impri
 
 
 def main():
+	global notes_changed
 	parser = argparse.ArgumentParser(description="Renumber endnotes from beginning")
 	parser.add_argument("-r", "--remove_orphans", action="store_true", help="remove notes in text if note is missing in endnotes.xhtml")
 	parser.add_argument("directory", metavar="DIRECTORY", help="a Standard Ebooks source directory")
@@ -282,13 +282,12 @@ def main():
 		processed += 1
 		current_num = process_file(textpath, file_name, endnotes, de_orphan, current_num)
 		print("Endnotes processed so far: " + str(current_num - 1))  # we subtract 1 because process_file increments it after each note found
+	# look inside endnotes.xhtml itself for notes to notes
 	process_endnotes_file(endnotes, de_orphan, current_num)
 	if processed == 0:
 		print("No files processed. Did you update manifest and order the spine?")
 	else:
 		print("Found {:d} endnotes.".format(current_num - 1))
-		# DEBUG
-		notes_changed = 1
 		if notes_changed > 0:
 			print("Changed {:d} endnotes".format(notes_changed))
 			# so we need to recreate the endnotes file
